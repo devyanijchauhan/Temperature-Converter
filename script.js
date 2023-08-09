@@ -1,34 +1,31 @@
-const inputs = document.querySelectorAll(".panel input");
-const c = document.querySelector("#celsius");
-const f = document.querySelector("#fahrenheit");
-const k = document.querySelector("#kelvin");
+let celsius = document.getElementById('celsius');
+let fahrenheit = document.getElementById('fahrenheit');
+let kelvin = document.getElementById('kelvin');
 
-inputs.forEach(input => {
+celsius.oninput = function () 
+{
+	let f = (parseFloat(celsius.value) * 9) / 5 + 32;
+	fahrenheit.value = parseFloat(f.toFixed(2));
 
-    input.addEventListener("input", e => {
+	let k = (parseFloat(celsius.value) + 273.15);
+	kelvin.value = parseFloat(k.toFixed(2));
+}
 
-        const unit = e.target.id;
+fahrenheit.oninput = function () 
+{
+	let c = ((parseFloat(fahrenheit.value) - 32) * 5) / 9;
+	celsius.value = parseFloat(c.toFixed(2));
 
-        const v = parseInt(e.target.value);
+	let k = (parseFloat(fahrenheit.value) - 32) * 5 / 9 + 273.15;
+	kelvin.value = parseFloat(k.toFixed(2));
+}
 
-        if(unit == "celsius"){
+kelvin.oninput = function () 
+{
+	let f = (parseFloat(kelvin.value) - 273.15) * 9 / 5 + 32;
+	fahrenheit.value = parseFloat(f.toFixed(2));
 
-            f.value = parseFloat((v * 1.8) + 32).toFixed(4) *1;
-
-            k.value = parseFloat(v + 273.15).toFixed(4) * 1;
-        }
-
-        else if(unit === "fahrenheit") {
-
-            c.value = parseFloat((v - 32) * 5 / 9).toFixed(4) * 1;
-
-            k.value = parseFloat(((v - 32) * 5 / 9) + 273.15).toFixed(4) * 1;
-         }
-        else if (unit === "kelvin") {
-
-            c.value = parseFloat(v - 273.15).toFixed(4) *1;
-
-            f.value = parseFloat((v - 273.15) * 9 / 5 + 32).toFixed(4) * 1;
-         }
-    });
-});
+	let c = (parseFloat(kelvin.value) - 273.15);
+	celsius.value = parseFloat(c.toFixed(2));
+}
+	
